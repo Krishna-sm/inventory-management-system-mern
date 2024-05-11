@@ -9,7 +9,7 @@ export const UserSlice = createSlice({
         setUser(state,action){
             state.user = action.payload
         },
-        removeUser(state, action) {
+        removeUser(state) {
             state.user = null
         }
     }

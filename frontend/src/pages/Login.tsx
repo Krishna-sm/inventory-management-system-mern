@@ -1,13 +1,13 @@
 import { ErrorMessage, Field, Formik } from 'formik'
-import { Button } from 'primereact/button'
-import { InputText } from 'primereact/inputtext'
-import React from 'react'
-import { ImSpinner, ImSpinner2 } from 'react-icons/im'
-import { Link } from 'react-router-dom'
+import { Button } from 'primereact/button' 
+import React from 'react' 
+import { Link, useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
+import { useLoginUserMutation } from '../provider/queries/Auth.query'
 
 const Login = () => {
-
+const [LoginUser,LoginUserResponse] = useLoginUserMutation()
+const navigate = useNavigate()
   type User={
     email:string,
     password:string
@@ -24,7 +24,28 @@ const Login = () => {
   })
 
   const OnSubmitHandler = async(e:User,{resetForm}:any)=>{
-      
+
+    try {
+      const { data, error }: any = await LoginUser(e)
+      if (error) {
+        console.log(error.data.message);
+        return
+
+      }
+
+      // console.log(data,error);
+
+
+      localStorage.setItem("token", data.token);
+
+
+      resetForm()
+      navigate("/")
+    } catch (error: any) {
+      // toast
+      console.log(error.message);
+
+    }
   }
 
   return (
@@ -35,7 +56,7 @@ const Login = () => {
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={OnSubmitHandler}>
           {({ values, setFieldValue, handleSubmit }) => (
             <>
-              <form onSubmit={handleSubmit} className="w-1/3 shadow-md rounded-md pt-10 pb-3 px-4 bg-white">
+              <form onSubmit={handleSubmit} className="w-[96%] md:w-[70%] lg:w-1/3 shadow-md rounded-md pt-10 pb-3 px-4 bg-white">
                 <div className="mb-3 py-1">
                   <label htmlFor="email">Email</label>
                   <Field id='email' name='email' className='w-full outline-none py-3 px-2 border-[.1px] border-zinc-400 rounded-lg' placeholder='Enter Email Address' />
@@ -49,7 +70,7 @@ const Login = () => {
 
                 </div>
                 <div className="mb-3 py-1">
-                  <Button className='w-full bg-red-500 text-white py-3 px-2 flex items-center justify-center'>Submit
+                  <Button loading={LoginUserResponse.isLoading} className='w-full bg-red-500 text-white py-3 px-2 flex items-center justify-center'>Submit
 
                   </Button>
                 </div>

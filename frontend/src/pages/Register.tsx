@@ -1,12 +1,15 @@
 import { ErrorMessage, Field, Formik } from 'formik'
-import { Button } from 'primereact/button'
-import { InputText } from 'primereact/inputtext'
-import React from 'react'
-import { ImSpinner, ImSpinner2 } from 'react-icons/im'
-import { Link } from 'react-router-dom'
+import { Button } from 'primereact/button' 
+import React from 'react' 
+import { Link, useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
+import { useRegisterUserMutation } from '../provider/queries/Auth.query'
 
 const Register = () => {
+
+  const [registerUser,registerUserResponse] = useRegisterUserMutation()
+
+  const navigate  = useNavigate()
 
   type User = {
     name: string,
@@ -27,8 +30,29 @@ const Register = () => {
   })
 
   const OnSubmitHandler = async (e: User, { resetForm }: any) => {
-        console.log({e});
-        resetForm()
+        // console.log({e});
+
+        try {
+          const {data,error }:any = await registerUser(e)
+              if(error){
+                console.log(error.data.message);
+                return
+                
+              }
+
+              // console.log(data,error);
+
+
+              localStorage.setItem("token",data.token);
+              
+
+          resetForm()
+          navigate("/")
+        } catch (error:any) {
+            // toast
+              console.log(error.message);
+              
+          }
         
   }
 
@@ -37,7 +61,7 @@ const Register = () => {
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={OnSubmitHandler}>
         {({ values, setFieldValue, handleSubmit }) => (
           <>
-            <form onSubmit={handleSubmit} className="w-1/3 shadow-md rounded-md pt-10 pb-3 px-4 bg-white">
+            <form onSubmit={handleSubmit} className="w-[96%] md:w-[70%] lg:w-1/3 shadow-md rounded-md pt-10 pb-3 px-4 bg-white">
             
               <div className="mb-3 py-1">
                 <label htmlFor="name">Name</label>
@@ -57,7 +81,7 @@ const Register = () => {
 
               </div>
               <div className="mb-3 py-1">
-                <Button raised type='submit'   className='w-full bg-red-500 text-white py-3 px-2 flex items-center justify-center'>Submit
+                <Button loading={registerUserResponse.isLoading} raised type='submit'   className='w-full bg-red-500 text-white py-3 px-2 flex items-center justify-center'>Submit
 
                 </Button>
               </div>
