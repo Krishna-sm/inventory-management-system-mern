@@ -4,6 +4,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 import { useRegisterUserMutation } from '../provider/queries/Auth.query'
+import { toast } from 'sonner'
 
 const Register = () => {
 
@@ -35,7 +36,7 @@ const Register = () => {
         try {
           const {data,error }:any = await registerUser(e)
               if(error){
-                console.log(error.data.message);
+                toast.error(error.data.message);
                 return
                 
               }
@@ -50,7 +51,7 @@ const Register = () => {
           navigate("/")
         } catch (error:any) {
             // toast
-              console.log(error.message);
+          toast.error(error.message);
               
           }
         

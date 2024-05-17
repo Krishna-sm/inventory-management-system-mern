@@ -9,12 +9,15 @@ import { store } from './provider/Store.tsx'
 
 import { PrimeReactProvider } from 'primereact/api';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
+import { Toaster } from 'sonner'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode> 
     
       <PrimeReactProvider>
     <Provider store={store}>
+    <Toaster position='top-right' />
     <RouterProvider router={Routes} />
+
     </Provider>
       </PrimeReactProvider>
   </React.StrictMode>,

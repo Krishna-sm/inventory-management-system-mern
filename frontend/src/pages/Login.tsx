@@ -4,6 +4,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 import { useLoginUserMutation } from '../provider/queries/Auth.query'
+import { toast } from 'sonner'
 
 const Login = () => {
 const [LoginUser,LoginUserResponse] = useLoginUserMutation()
@@ -28,7 +29,7 @@ const navigate = useNavigate()
     try {
       const { data, error }: any = await LoginUser(e)
       if (error) {
-        console.log(error.data.message);
+        toast.error(error.data.message);
         return
 
       }
@@ -43,7 +44,7 @@ const navigate = useNavigate()
       navigate("/")
     } catch (error: any) {
       // toast
-      console.log(error.message);
+      toast.error(error.message);
 
     }
   }
