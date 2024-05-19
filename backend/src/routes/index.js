@@ -5,6 +5,10 @@ const routes= [
     {
         path:'/auth',
         route:require("./Auth.route")
+    },
+      {
+        path:'/consumer',
+        route:require("./Consumer.route")
     }
 ]
 
