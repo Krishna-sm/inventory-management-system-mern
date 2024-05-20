@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.p-dialog-footer{
+        display: flex  !important;
+            justify-content: end !important;;
+            gap: 22px !important;;
+}

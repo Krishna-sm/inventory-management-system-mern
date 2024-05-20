@@ -1,4 +1,4 @@
-const {body, param} = require("express-validator")
+const {body, param, query} = require("express-validator")
 class ConsumerValidation {
 
 
@@ -14,6 +14,11 @@ class ConsumerValidation {
 
     static Params_id= [
         param("id").isMongoId().withMessage("provide valid Id").notEmpty().withMessage("Id is required")
+    ]
+
+    
+    static query_page= [
+        query("page").optional()
     ]
  
 

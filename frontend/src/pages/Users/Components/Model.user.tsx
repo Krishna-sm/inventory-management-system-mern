@@ -4,9 +4,11 @@ import { ErrorMessage, Field, Formik } from 'formik';
 import { Calendar } from 'primereact/calendar';
 import * as yup from 'yup'
 import {toast} from 'sonner'
+import { useRegisterConsumerMutation } from '../../../provider/queries/Users.query';
+import { Button } from 'primereact/button';
 const Model = ({ visible, setVisible }:any) => {
 
-
+  const [RegisterConsumer, RegisterConsumerResponse ] = useRegisterConsumerMutation()
     const validationSchema = yup.object({
       name: yup.string().required("Name is required"),
       email: yup.string().email("Email must be valid").required("email is required"),
@@ -25,9 +27,18 @@ const Model = ({ visible, setVisible }:any) => {
 
     const onSubmitHandler = async(e:any,{resetForm}:any)=>{
             try{
-              console.log(e)
+              // console.log(e)
+              const {data,error }:any = await RegisterConsumer(e)
 
-                toast.success("Consumer Added Sucessfully")
+              if (error) {
+                toast.error(error.data.message);
+                return
+
+              }
+
+
+
+              toast.success(data.msg)
                 resetForm()
                 setVisible(false)
             }catch(e:any){
@@ -37,7 +48,7 @@ toast.error(e.message)
 
   return (
     <> 
-        <Dialog header="Add User" position='top' visible={visible} className=" w-full md:w-[70%] lg:w-1/2" onHide={() => setVisible(false)}>
+        <Dialog draggable={false} header="Add User" position='top' visible={visible} className=" w-full md:w-[70%] lg:w-1/2" onHide={() => setVisible(false)}>
          
         <Formik onSubmit={onSubmitHandler} initialValues={initialValues} validationSchema={validationSchema}>
             {({values,setFieldValue,handleSubmit})=>(
@@ -80,7 +91,7 @@ toast.error(e.message)
                 <ErrorMessage name='address' className='text-red-500 capitalize' component={'p'} />
               </div>
                       <div className="flex justify-end">
-                            <button className="text-white px-5 rounded-sm bg-indigo-500 py-3 text-center ">Add Consumer</button>
+                  <Button loading={RegisterConsumerResponse.isLoading} className="text-white px-5 rounded-sm bg-indigo-500 py-3 text-center ">Add Consumer</Button>
                         </div>
                 
                       </form>

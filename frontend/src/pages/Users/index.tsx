@@ -1,18 +1,15 @@
  
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from 'primereact/treetable';
-import { Column } from 'primereact/column';
-import { Button } from 'primereact/button'; 
-import BredCrums from '../../components/BredCrums';
-import { FaPlus } from "react-icons/fa6";
-import { TreeNode } from 'primereact/treenode';
-import Model from './Components/Model.user';
-import { LuView } from "react-icons/lu";
-import { FaRegEdit ,FaRegTrashAlt} from "react-icons/fa"; 
+import React, { useState } from 'react'; 
+import BredCrums from '../../components/BredCrums'; 
+import Model from './Components/Model.user'; 
+import { useGetAllConsumersQuery } from '../../provider/queries/Users.query';
+import Loader from '../../components/Loader';
+import TableCard from './Components/Card.user';
 const UserPage = () => {
   const [visible, setVisible] = useState(false);
 
-  
+    const {isLoading,data } = useGetAllConsumersQuery({})
+ 
   return (
 
 
@@ -34,7 +31,9 @@ const UserPage = () => {
             <div className="w-full ">
           
 
-<div className="relative overflow-x-auto shadow">
+              {isLoading ? <>
+                        <Loader/>
+              </>:<div className="relative overflow-x-auto shadow">
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50  ">
             <tr>
@@ -56,29 +55,14 @@ const UserPage = () => {
            
 
               {
-                Array(10).fill(null).map((c,i)=>{
-                  return  <tr  key={i} className="bg-white border-b  ">
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                    Harish
-                </th>
-                <td className="px-6 py-4">
-                    hari@gmail.com
-                </td>
-                <td className="px-6 py-4">
-                    11224568525
-                </td>
-                <td className="px-6 py-4">
-                   <button title="View " className="p-4 bg-teal-500 text-white rounded-sm mx-2"><LuView  className="text-xl" /> </button>
-                        <button title="Edit " className="p-4 bg-orange-400 text-white rounded-sm mx-2"><FaRegEdit  className="text-xl" /> </button>
-                            <button title="delete " className="p-4 bg-red-500 text-white rounded-sm mx-2"><FaRegTrashAlt  className="text-xl" /> </button>
-                </td>
-            </tr>
+                                  data.users.length>0&&data.users.map((c:any,i:number)=>{
+                                      return <TableCard key={i}  data={c}/>
                 })
               }
             
         </tbody>
     </table>
-</div>
+</div>}
 
 
             </div>

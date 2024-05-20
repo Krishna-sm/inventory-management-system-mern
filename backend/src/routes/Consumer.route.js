@@ -7,8 +7,17 @@ const router = express.Router();
 
 router.use(Authentication);
 
+router.get("/get-all",ConsumerValidation.query_page,Validation,ConsumerController.GetAllUser)
 router.post("/register",ConsumerValidation.RegisterConsumer,Validation,ConsumerController.RegisterConsumer)
-router.post("/delete/:id",ConsumerValidation.Params_id,Validation,ConsumerController.DeleteConsumer)
+router.delete("/delete/:id",ConsumerValidation.Params_id,Validation,ConsumerController.DeleteConsumer)
+
+
+
+
+
+router.get("/get/:id",ConsumerValidation.Params_id,Validation,ConsumerController.getById)
+router.patch("/update/:id",ConsumerValidation.RegisterConsumer,Validation,ConsumerController.updateById)
+
 
 
 //

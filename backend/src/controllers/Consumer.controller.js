@@ -8,6 +8,23 @@ class ConsumerController{
                 return    res.status(httpStatus.CREATED).json(res_obj)
                  
             })
+             static updateById= CatchAsync(async(req,res)=>{
+                const res_obj  = await ConsumerService.updateById(req?.user,req.body,req.params.id);
+                return    res.status(httpStatus.OK).json(res_obj)
+                 
+            })
+            
+              static getById= CatchAsync(async(req,res)=>{
+                const res_obj  = await ConsumerService.getById(req?.user,req.params.id);
+                return    res.status(httpStatus.OK).json(res_obj)
+                 
+            })
+            
+             static GetAllUser= CatchAsync(async(req,res)=>{
+                const res_obj  = await ConsumerService.GetAllUser(req?.user,req.query.page);
+                return    res.status(httpStatus.OK).json(res_obj)
+                 
+            })
   static DeleteConsumer= CatchAsync(async(req,res)=>{
                 const res_obj  = await ConsumerService.DeleteConsumer(req?.user,req.params.id);
                 return    res.status(httpStatus.OK).json(res_obj)

@@ -15,8 +15,8 @@ class ConsumerService{
             return
         }
 
-            await ConsumerModel({
-                name,email,mobile,dob,address
+            await ConsumerModel.create({
+                name,email,mobile,dob,address,user
             })
 
             return {
@@ -44,7 +44,67 @@ class ConsumerService{
 
         
     }
+    static async getById(user,id){
+         
+
+        const checkExist = await ConsumerModel.findOne({_id:id,user:user});
+
+        console.log({user,id});
+
+        if(!checkExist){
+            throw new ApiError(httpStatus.BAD_REQUEST,"Consumer Not Found in Record");
+            return
+        }
+
+                
+
+            return {
+                user:checkExist
+            }
+
+        
+    }
+
     
+
+    static async GetAllUser(user,page=1){
+
+       const data =  await ConsumerModel.find({user}).select("name email mobile");
+            return {
+                users:data
+            }
+
+
+
+
+    }
+    
+    static async updateById(user,body,id){
+        
+        const {name,email,mobile,dob,address} = body
+
+        const checkExist = await ConsumerModel.findById({_id:id});
+
+        if(checkExist.email !==email){
+
+        const checkExistEmail = await ConsumerModel.findOne({email:email,user:user});
+
+        if(checkExistEmail){
+            throw new ApiError(httpStatus.BAD_REQUEST,"Consumer Email Already in Another Record ");
+            return
+        } 
+        }
+
+            await ConsumerModel.findByIdAndUpdate(id,{
+                name,email,mobile,dob,address,user
+            })
+
+            return {
+                msg:"Consumer Update :)"
+            }
+
+        
+    }
 }
 
 module.exports = ConsumerService
