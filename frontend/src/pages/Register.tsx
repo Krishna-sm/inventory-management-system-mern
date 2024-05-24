@@ -1,18 +1,22 @@
 import { ErrorMessage, Field, Formik } from 'formik'
 import { Button } from 'primereact/button' 
-import React from 'react' 
+import React, { useRef } from 'react' 
 import { Link, useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 import { useRegisterUserMutation } from '../provider/queries/Auth.query'
 import { toast } from 'sonner'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 const Register = () => {
 
   const [registerUser,registerUserResponse] = useRegisterUserMutation()
 
   const navigate  = useNavigate()
+  //@ts-ignore
+  const RecaptchaRef = useRef<any>();
 
   type User = {
+    token:string;
     name: string,
     email: string,
     password: string
@@ -20,6 +24,7 @@ const Register = () => {
 
   const initialValues: User = {
     name: '',
+    token:'',
     email: '',
     password: ''
   }
@@ -35,16 +40,19 @@ const Register = () => {
 
         try {
           const {data,error }:any = await registerUser(e)
+       
+          
               if(error){
                 toast.error(error.data.message);
                 return
                 
               }
 
-              // console.log(data,error);
+              console.log(data,error);
 
 
               localStorage.setItem("token",data.token);
+
               
 
           resetForm()
@@ -53,6 +61,8 @@ const Register = () => {
             // toast
           toast.error(error.message);
               
+          }finally{
+          RecaptchaRef.current.reset();
           }
         
   }
@@ -82,7 +92,14 @@ const Register = () => {
 
               </div>
               <div className="mb-3 py-1">
-                <Button loading={registerUserResponse.isLoading} raised type='submit'   className='w-full bg-red-500 text-white py-3 px-2 flex items-center justify-center'>Submit
+                <ReCAPTCHA
+                  ref={RecaptchaRef}
+                  sitekey={import.meta.env.VITE_SITE_KEY}
+                  onChange={(e) => { setFieldValue('token', e) }}
+                />
+              </div>
+              <div className="mb-3 py-1">
+                <Button disabled={!values.token} loading={registerUserResponse.isLoading} raised type='submit'   className='w-full bg-red-500 text-white py-3 px-2 flex items-center justify-center'>Submit
 
                 </Button>
               </div>

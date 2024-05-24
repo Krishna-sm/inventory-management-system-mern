@@ -1,21 +1,26 @@
 import { ErrorMessage, Field, Formik } from 'formik'
 import { Button } from 'primereact/button' 
-import React from 'react' 
+import React, { useRef } from 'react' 
 import { Link, useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 import { useLoginUserMutation } from '../provider/queries/Auth.query'
 import { toast } from 'sonner'
-
+import ReCAPTCHA from "react-google-recaptcha";
 const Login = () => {
 const [LoginUser,LoginUserResponse] = useLoginUserMutation()
 const navigate = useNavigate()
   type User={
+    token:string,
     email:string,
     password:string
   }
 
+  //@ts-ignore
+  const RecaptchaRef = useRef<any>();
+
   const initialValues: User={
-    email:'',
+    token: '',
+    email: '',
     password:''
   }
 
@@ -27,6 +32,7 @@ const navigate = useNavigate()
   const OnSubmitHandler = async(e:User,{resetForm}:any)=>{
 
     try {
+ 
       const { data, error }: any = await LoginUser(e)
       if (error) {
         toast.error(error.data.message);
@@ -46,6 +52,8 @@ const navigate = useNavigate()
       // toast
       toast.error(error.message);
 
+    }finally{
+      RecaptchaRef.current.reset();
     }
   }
 
@@ -71,7 +79,14 @@ const navigate = useNavigate()
 
                 </div>
                 <div className="mb-3 py-1">
-                  <Button loading={LoginUserResponse.isLoading} className='w-full bg-red-500 text-white py-3 px-2 flex items-center justify-center'>Submit
+                  <ReCAPTCHA
+                    ref={RecaptchaRef}
+                    sitekey={import.meta.env.VITE_SITE_KEY}
+                    onChange={(e) => { setFieldValue('token',e)}}
+                  />
+                </div>
+                <div className="mb-3 py-1 flex items-center justify-center">
+                  <Button disabled={!values.token} loading={LoginUserResponse.isLoading} className='w-full bg-red-500 text-white py-3 px-2 flex items-center justify-center'>Submit
 
                   </Button>
                 </div>
