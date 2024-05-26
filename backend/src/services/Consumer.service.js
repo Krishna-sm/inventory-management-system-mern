@@ -67,11 +67,46 @@ class ConsumerService{
 
     
 
-    static async GetAllUser(user,page=1){
+    static async GetAllUser(user,page=1,query=''){
+            const limit = 10;
+                const skip = (Number(page)-1)*limit
 
-       const data =  await ConsumerModel.find({user}).select("name email mobile");
+                const queryies = {
+                    user,
+                   $or:[
+                    {
+                         name: new RegExp(query)
+                    },
+                    {
+                         email: new RegExp(query)
+                    },
+                    {
+                         address: new RegExp(query)
+                    },
+                    {
+                         mobile: new RegExp(query)
+                    },
+                   ]
+                }
+
+
+       const data =  await ConsumerModel.find(queryies).select("name email mobile")
+                    .skip(skip)
+                    .limit(limit)
+       ;
+
+        //total document
+
+        const totalConsumer = await ConsumerModel.countDocuments(queryies)
+
+
+        //hasmore
+        const hasMore= skip+limit<totalConsumer
+
+
             return {
-                users:data
+                users:data,
+                more:hasMore
             }
 
 

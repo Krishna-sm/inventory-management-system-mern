@@ -18,8 +18,13 @@ class ConsumerValidation {
 
     
     static query_page= [
-        query("page").optional()
+        query("page").optional(),
+        query("query").optional(),
     ]
+
+    
+    
+    
  
 
     
