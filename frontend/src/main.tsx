@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     
       <PrimeReactProvider>
     <Provider store={store}>
-    <Toaster position='top-right' />
+    <Toaster position='top-right' closeButton />
     <RouterProvider router={Routes} />
 
     </Provider>

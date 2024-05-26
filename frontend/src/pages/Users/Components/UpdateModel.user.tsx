@@ -27,13 +27,7 @@ const UpdateModel = ({ visible ,setVisible,_id}:any) => {
         address: yup.string().required("Address is required"),
         dob: yup.string().required("DOB is required"),
     })
-        console.log({
-            name: data.user.name,
-            email: data.user.email,
-            mobile: data.user.mobile,
-            address: data.user.address,
-            dob: data.user.dob
-        })
+        
     const initialValues = {
         name: data.user.name,
         email: data.user.email,

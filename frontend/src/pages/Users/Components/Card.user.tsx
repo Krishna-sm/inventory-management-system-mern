@@ -7,7 +7,7 @@ import { toast } from 'sonner'
 import { Button } from 'primereact/button' 
 import UpdateModel from './UpdateModel.user'
 
-const TableCard = ({data}:any) => {
+const TableCard = ({ data, id }:any) => {
     const [DeleteConsumer, DeleteConsumerResponse] = useDeleteConsumerMutation()
 
     const [visible, setVisible] = useState(false) ;
@@ -47,6 +47,9 @@ const TableCard = ({data}:any) => {
   return (
     <>
           <tr  className="bg-white border-b  ">
+              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                  {id}
+              </th>
               <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                   {data.name}
               </th>

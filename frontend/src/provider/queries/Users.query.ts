@@ -19,7 +19,7 @@ export const UserApi = createApi({
         }),
         getAllConsumers: builder.query<any, any>({
             query: (obj) => ({
-                url: '/consumer/get-all',
+                url: `/consumer/get-all?query=${obj.query}&page=${obj.page}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("token")
