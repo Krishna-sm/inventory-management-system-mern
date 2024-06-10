@@ -140,6 +140,32 @@ class ConsumerService{
 
         
     }
+
+     static async GetUserForSearch(user){ 
+
+                
+
+
+       const data =  await ConsumerModel.find({user}).select("name dob")
+                 
+       ;
+
+        //total document 
+
+ 
+
+
+            return {
+                users:data 
+            }
+
+
+
+
+    }
+    
+
+    
 }
 
 module.exports = ConsumerService

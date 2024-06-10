@@ -30,6 +30,13 @@ class ConsumerController{
                 return    res.status(httpStatus.OK).json(res_obj)
                  
             })
+             static GetUserForSearch= CatchAsync(async(req,res)=>{
+                const res_obj  = await ConsumerService.GetUserForSearch(req?.user);
+                return    res.status(httpStatus.OK).json(res_obj)
+                 
+            })
+
+            
 
             
 }

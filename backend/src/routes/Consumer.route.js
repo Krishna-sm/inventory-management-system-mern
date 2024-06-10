@@ -8,6 +8,7 @@ const router = express.Router();
 router.use(Authentication);
 
 router.get("/get-all",ConsumerValidation.query_page,Validation,ConsumerController.GetAllUser)
+router.get("/get-search",ConsumerController.GetUserForSearch)
 router.post("/register",ConsumerValidation.RegisterConsumer,Validation,ConsumerController.RegisterConsumer)
 router.delete("/delete/:id",ConsumerValidation.Params_id,Validation,ConsumerController.DeleteConsumer)
 

@@ -14,6 +14,7 @@
     "axios": "^1.6.8",
     "chart.js": "^4.4.2",
     "formik": "^2.4.6",
+    "moment": "^2.30.1",
     "primereact": "^10.6.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

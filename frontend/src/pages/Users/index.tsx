@@ -21,7 +21,7 @@ const UserPage = () => {
 
     const OnNextPageHandler = ()=>{
 
-      const page = Number(SearchParams.get("page")) || 0;
+      const page = Number(SearchParams.get("page")) || 1;
       const query = SearchParams.get("query") || '';
 
       let string = ``;
@@ -41,7 +41,7 @@ const UserPage = () => {
 
   const onPrevPageHandler = () => {
 
-    const page = Number(SearchParams.get("page")) || 0;
+    const page = Number(SearchParams.get("page")) || 1;
     const query = SearchParams.get("query") || '';
 
     let string = ``;
@@ -96,7 +96,7 @@ const UserPage = () => {
         {(Number(SearchParams.get("page")) || 1) > 1 && <button onClick={onPrevPageHandler} title='Prev Page' className="text-black  text-xl lg:text-3xl p-2"><BsArrowLeftCircle /></button>}
 
         
-        {data.more && <button onClick={OnNextPageHandler} title='Next Page' className="text-black  text-xl lg:text-3xl p-2"><BsArrowRightCircle /></button>}
+        {data && data.more && <button onClick={OnNextPageHandler} title='Next Page' className="text-black  text-xl lg:text-3xl p-2"><BsArrowRightCircle /></button>}
         </div>
 
             <div className="w-full ">
