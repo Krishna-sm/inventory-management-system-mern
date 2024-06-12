@@ -60,9 +60,9 @@ const UserPage = () => {
 
   const onSubmitHandler = (e:FormEvent<HTMLFormElement>)=>{ 
     e.preventDefault();
-    if (!Search){
-      return 
-    }
+    // if (!Search){
+    //   return 
+    // }
     let string = `?query=${Search}&page=${1}`
     navigate(`/user` + string);
 

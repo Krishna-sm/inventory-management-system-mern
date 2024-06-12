@@ -10,4 +10,12 @@ router.use(Authentication);
 router.route("/create-order")
 .post(CreateOrder,Validation,OrdersController.createOrder)
 
+router.route("/get-orders")
+.get(OrdersController.getAllorders)
+
+router.route("/delete/:id")
+.delete(OrdersController.deleteOrder)
+
+
+
 module.exports = router

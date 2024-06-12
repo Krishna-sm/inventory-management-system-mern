@@ -21,7 +21,7 @@ const TableCard = ({ data, id }:any) => {
             defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept:async()=>{
-                // console.log("accept for "+_id);
+                console.log("accept for "+_id);
 
                 try {
                     // console.log(e)
@@ -67,7 +67,7 @@ const TableCard = ({ data, id }:any) => {
           </tr>
           <UpdateModel visible={visible} setVisible={setVisible} _id={data._id} />
          
-          <ConfirmDialog acceptClassName='' className=' '  contentClassName='py-2 ' closable  />
+          <ConfirmDialog  acceptClassName='' className=' '  contentClassName='py-2 ' closable  />
 
     </>
   )

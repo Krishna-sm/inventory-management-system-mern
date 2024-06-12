@@ -9,6 +9,20 @@ class OrdersController{
                  
             })
 
+  static getAllorders= CatchAsync(async(req,res)=>{
+                const res_obj  = await OrderService.getAllorders(req?.user,req.query?.page,req.query?.query);
+                return    res.status(httpStatus.OK).json(res_obj)
+                 
+            })
+              static deleteOrder= CatchAsync(async(req,res)=>{
+                const res_obj  = await OrderService.deleteOrder(req?.user,req?.params?.id);
+                return    res.status(httpStatus.OK).json(res_obj)
+                 
+            })
+
+            
+            
+
         }
 
         

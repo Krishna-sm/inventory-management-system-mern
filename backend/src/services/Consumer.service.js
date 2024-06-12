@@ -1,5 +1,5 @@
 const httpStatus = require("http-status")
-const { ConsumerModel } = require("../models")
+const { ConsumerModel, OrdersModel } = require("../models")
 const ApiError = require("../utils/ApiError")
 class ConsumerService{
 
@@ -36,6 +36,7 @@ class ConsumerService{
             return
         }
 
+                await OrdersModel.deleteMany({consumer:id})
                 
 
             return {
