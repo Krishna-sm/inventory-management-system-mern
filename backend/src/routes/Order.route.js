@@ -13,6 +13,11 @@ router.route("/create-order")
 router.route("/get-orders")
 .get(OrdersController.getAllorders)
 
+
+
+router.route("/get-invoice/:id")
+.get(OrdersController.getInvoiceById)
+
 router.route("/delete/:id")
 .delete(OrdersController.deleteOrder)
 

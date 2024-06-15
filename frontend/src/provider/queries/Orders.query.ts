@@ -38,11 +38,20 @@ export const OrdersApi = createApi({
             }), 
             invalidatesTags: ['getAllOrders']
         }),
+        getInvoiceById: builder.query<any, any>({
+            query: (obj) => ({
+                url: `/orders/get-invoice/${obj}`,
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("token")
+                }
+            }),
+        }),
 
-
+        
          
     }),
 })
 
 
-export const { useCreateOrderMutation,useGetAllOrdersQuery , useDeleteOrderMutation } = OrdersApi
+export const { useCreateOrderMutation,useGetAllOrdersQuery , useDeleteOrderMutation ,useGetInvoiceByIdQuery} = OrdersApi

@@ -164,6 +164,42 @@ class ConsumerService{
 
 
     }
+     static async DashboardData(user){ 
+
+                
+
+
+       const consumers =  await ConsumerModel.countDocuments({user})
+       const orders =  await OrdersModel.find({user}).select("items.price -_id") 
+                 
+       ;
+         const arr =await  orders.map((cur)=>{
+    // console.log();
+    return [...cur.items.map((c)=>c.price)]
+  })
+
+    //    let sale =0
+
+    //    for (let index = 0; index < array.length; index++) {
+    //     const element = array[index];
+        
+    //    }
+
+        //total document 
+
+ 
+
+
+            return {
+                consumers,
+                 orders:orders.length,
+                 sell:arr.flat(2).reduce((a,c)=>a+c)
+            }
+
+
+
+
+    }
     
 
     

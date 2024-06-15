@@ -12,7 +12,9 @@ router.get("/get-search",ConsumerController.GetUserForSearch)
 router.post("/register",ConsumerValidation.RegisterConsumer,Validation,ConsumerController.RegisterConsumer)
 router.delete("/delete/:id",ConsumerValidation.Params_id,Validation,ConsumerController.DeleteConsumer)
 
-
+router.route("/dashboard")
+.get(ConsumerController.DashboardData)
+;
 
 
 

@@ -36,6 +36,13 @@ class ConsumerController{
                  
             })
 
+             static DashboardData= CatchAsync(async(req,res)=>{
+                const res_obj  = await ConsumerService.DashboardData(req?.user);
+                return    res.status(httpStatus.OK).json(res_obj)
+                 
+            })
+
+             
             
 
             

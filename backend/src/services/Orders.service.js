@@ -65,6 +65,24 @@ class OrderService{
             }
 
         }
+ static async getInvoiceById(user,id){
+     
+                const order = await OrdersModel.findOne({user,_id:id})
+                .select("consumer user items createdAt")
+                .populate("consumer","name email address -_id")
+                .populate("user","name -_id")
+
+                if(!order){
+                    throw new ApiError(httpStatus.NOT_FOUND,"Order Not Found");
+                    return 
+                }
+ 
+                
+
+            return order
+
+        }
+        
 
 
 

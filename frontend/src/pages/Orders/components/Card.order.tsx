@@ -11,7 +11,11 @@ import ShowAndPrintModel from './ShowAndPrint.model'
 // import UpdateModel from './UpdateModel.user'
 
 const TableCard = ({ data, id }: any) => {
+
+
+
     const [DeleteConsumer, DeleteConsumerResponse] = useDeleteOrderMutation()
+    
 
     const [visible, setVisible] = useState(false);
 
@@ -96,7 +100,7 @@ const TableCard = ({ data, id }: any) => {
                 </td>
             </tr>
             {/* <UpdateModel visible={visible} setVisible={setVisible} _id={data._id} /> */}
-            <ShowAndPrintModel visible={visible} setVisible={setVisible}  />
+            <ShowAndPrintModel id={data._id} visible={visible} setVisible={setVisible}  />
             <ConfirmDialog id='order.queruies' acceptClassName='' className=' ' contentClassName='py-2 ' closable />
 
         </>

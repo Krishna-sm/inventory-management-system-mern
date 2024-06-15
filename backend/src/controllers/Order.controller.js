@@ -19,7 +19,14 @@ class OrdersController{
                 return    res.status(httpStatus.OK).json(res_obj)
                  
             })
+     static getInvoiceById= CatchAsync(async(req,res)=>{
+                const res_obj  = await OrderService.getInvoiceById(req?.user,req?.params?.id);
+                return    res.status(httpStatus.OK).json(res_obj)
+                 
+            })
 
+
+            
             
             
 
