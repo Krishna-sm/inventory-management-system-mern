@@ -193,7 +193,7 @@ class ConsumerService{
             return {
                 consumers,
                  orders:orders.length,
-                 sell:arr.flat(2).reduce((a,c)=>a+c)
+                 sell:arr.length>0 ?arr.flat(2).reduce((a,c)=>a+c):arr
             }
 
 
