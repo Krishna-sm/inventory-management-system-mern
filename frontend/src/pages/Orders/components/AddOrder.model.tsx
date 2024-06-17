@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+ 
 import { Dialog } from 'primereact/dialog';
-import { ErrorMessage, Field, Formik, FieldArray } from 'formik';
-import { Calendar } from 'primereact/calendar';
-import * as yup from 'yup'
+import { ErrorMessage, Field, Formik, FieldArray } from 'formik';  
 import { toast } from 'sonner'
+import * as yup from 'yup';
 import { useGetForSearchUserQuery } from '../../../provider/queries/Users.query';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
@@ -11,10 +10,9 @@ import { FaTrashAlt } from "react-icons/fa";
 import Loader from '../../../components/Loader';
 import moment from 'moment';
 import { useCreateOrderMutation } from '../../../provider/queries/Orders.query';
-const AddOrderModel = ({ visible, setVisible }: any) => {
-    const [selectedCountry, setSelectedCountry] = useState<any>(null);
+const AddOrderModel = ({ visible, setVisible }: any) => { 
 
-    const [CreateOrder,CreateOrderResponse] = useCreateOrderMutation()
+    const [CreateOrder] = useCreateOrderMutation()
 
 
     const { isLoading,isFetching,data }= useGetForSearchUserQuery({});
@@ -77,7 +75,7 @@ const AddOrderModel = ({ visible, setVisible }: any) => {
         items:[ 
         ]
     }
-
+    // @ts-ignore
     const onSubmitHandler = async (e: any, { resetForm }: any) => {
         try {
             // console.log(e)
@@ -128,7 +126,7 @@ const AddOrderModel = ({ visible, setVisible }: any) => {
                                                   <button type='button' onClick={() => { push({name:'',price:''})}} className='bg-purple-500 px-4  text-white py-2 rounded-md'>Add +</button>
                                         </div>
                                                                                 {
-                                                  values.items.length>0 &&  values.items.map((c,i)=>{
+                                                  values.items.length>0 &&  values.items.map((_,i)=>{
                                                             
 
                                                             return<div className='w-full flex items-center justify-between gap-x-4' key={i}>

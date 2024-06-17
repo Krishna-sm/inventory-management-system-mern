@@ -29,7 +29,7 @@ export const UserApi = createApi({
         }),
 
         getForSearchUser: builder.query<any, any>({
-            query: (obj) => ({
+            query: () => ({
                 url: `/consumer/get-search`,
                 method: 'GET',
                 headers: {
