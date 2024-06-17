@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import   { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 import { useDashboardDataQuery } from '../../../provider/queries/Users.query';
 import { useLocation } from 'react-router-dom';

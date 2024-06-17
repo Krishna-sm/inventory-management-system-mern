@@ -1,5 +1,4 @@
-import React from 'react'
-
+ 
 import * as yup from 'yup';
 import { ErrorMessage, Field, Formik } from 'formik'
 import { Dialog } from 'primereact/dialog';
@@ -7,8 +6,7 @@ import { Button } from 'primereact/button';
 import { Calendar } from 'primereact/calendar';
 import { toast } from 'sonner';
 import { useGetConsumersQuery, useUpdateConsumerMutation } from '../../../provider/queries/Users.query';
-import Loader from '../../../components/Loader';
-import { elements } from 'chart.js';
+import Loader from '../../../components/Loader'; 
 const UpdateModel = ({ visible ,setVisible,_id}:any) => {
 
     

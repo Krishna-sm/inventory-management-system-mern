@@ -1,5 +1,5 @@
 import { confirmDialog, ConfirmDialog } from 'primereact/confirmdialog'
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa'
 import { LuView } from 'react-icons/lu'
 import { useDeleteConsumerMutation } from '../../../provider/queries/Users.query'

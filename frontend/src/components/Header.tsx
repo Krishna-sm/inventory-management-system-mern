@@ -1,14 +1,13 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { collapsedSidebar, SidebarSlicePath, toggleSidebar } from '../provider/slice/Sidebar.slice';
+ 
+import { useDispatch,  } from 'react-redux'
+import { collapsedSidebar  ,toggleSidebar } from '../provider/slice/Sidebar.slice';
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoLogOutOutline } from "react-icons/io5";
 import { removeUser } from '../provider/slice/user.slice';
 import { useNavigate } from 'react-router-dom';
 const Header = () => {
 
-  const disptach = useDispatch();
-  const selector = useSelector(SidebarSlicePath)
+  const disptach = useDispatch(); 
 
   const sidebarHandler = () => disptach(collapsedSidebar())
   const sidebarHandlerToggle = () => disptach(toggleSidebar())

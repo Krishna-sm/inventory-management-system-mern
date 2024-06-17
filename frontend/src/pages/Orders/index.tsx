@@ -1,8 +1,7 @@
 
-import React, { FormEvent, useState } from 'react';
+import  { FormEvent, useState } from 'react';
 import BredCrums from '../../components/BredCrums';
-// import Model from './Components/Model.user';
-import { useGetAllConsumersQuery } from '../../provider/queries/Users.query';
+// import Model from './Components/Model.user'; 
 import Loader from '../../components/Loader';
 // import TableCard from './Components/Card.user';
 import { BsArrowRightCircle, BsArrowLeftCircle } from "react-icons/bs";

@@ -1,5 +1,4 @@
-import { Dialog } from 'primereact/dialog'
-import React from 'react'
+import { Dialog } from 'primereact/dialog' 
 import { useGetInvoiceByIdQuery } from '../../../provider/queries/Orders.query'
 import Loader from '../../../components/Loader';
 import moment from 'moment';
@@ -72,7 +71,7 @@ const ShowAndPrintModel = ({ setVisible, visible,id }:any) => {
                   </th>
                   <th className='border capitalize text-center py-2'>
                     &#8377;  {
-                      data.items && data.items.length > 0 && data.items.map((cur: OrderDoc, i: OrderDoc) =>cur.price ).reduce((a:any,c:any)=>a+c,0)
+                      data.items && data.items.length > 0 && data.items.map((cur: OrderDoc ) =>cur.price ).reduce((a:any,c:any)=>a+c,0)
 
                     } /-
                   </th>
